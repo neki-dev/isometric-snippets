@@ -2,8 +2,14 @@
 
 * [Definitions](https://github.com/neki-dev/isometric-snippets?tab=readme-ov-file#definitions)
 * [Render](https://github.com/neki-dev/isometric-snippets?tab=readme-ov-file#render)
+  * [Get depth](https://github.com/neki-dev/isometric-snippets?tab=readme-ov-file#get-depth)
 * [Conversion](https://github.com/neki-dev/isometric-snippets?tab=readme-ov-file#conversion)
+  * [Convert matrix position to world position](https://github.com/neki-dev/isometric-snippets?tab=readme-ov-file#convert-matrix-position-to-world-position)
+  * [Convert world position to matrix position](https://github.com/neki-dev/isometric-snippets?tab=readme-ov-file#convert-world-position-to-matrix-position)
+  * [Convert world position to screen position](https://github.com/neki-dev/isometric-snippets?tab=readme-ov-file#convert-world-position-to-screen-position)
 * [Math](https://github.com/neki-dev/isometric-snippets?tab=readme-ov-file#math)
+  * [Get distance](https://github.com/neki-dev/isometric-snippets?tab=readme-ov-file#get-distance)
+  * [Get angle](https://github.com/neki-dev/isometric-snippets?tab=readme-ov-file#get-angle)
 
 .
 
@@ -76,21 +82,21 @@ function worldToScreen(positionAtWorld) {
 
 # Math
 
-### Get isometric distance
+### Get isometric distance (for world positions)
 ```js
-function distance(a, b) {
+function distance(from, to) {
   return Math.hypot(
-    (b.x - a.x),
-    (b.y - a.y) / PERSPECTIVE,
+    (to.x - from.x),
+    (to.y - from.y) / PERSPECTIVE,
   );
 }
 ```
 
-### Get isometric angle
+### Get isometric angle (for world positions)
 ```js
 function angle(from, to) {
   return Math.atan2(
-    (to.y - from.y) / DIMENSION_PERSPECTIVE,
+    (to.y - from.y) / PERSPECTIVE,
     (to.x - from.x),
   );
 }
