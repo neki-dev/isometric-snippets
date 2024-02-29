@@ -21,8 +21,8 @@
 
 ### Get depth
 ```js
-function depth(position) {
-  return position.y + position.z;
+function depth(positionAtWorld) {
+  return positionAtWorld.y + positionAtWorld.z;
 }
 ```
 
@@ -30,46 +30,46 @@ function depth(position) {
 
 ### Convert matrix position to world position
 ```js
-function matrixToWorld(position) {
+function matrixToWorld(positionAtMatrix) {
   const halfSize = {
     x: TILE_X / 2,
     y: TILE_Y / 2,
   };
 
   return {
-    x: (position.x - position.y) * halfSize.x,
-    y: (position.x + position.y) * halfSize.y,
-    z: position.z * TILE_Z,
+    x: (positionAtMatrix.x - positionAtMatrix.y) * halfSize.x,
+    y: (positionAtMatrix.x + positionAtMatrix.y) * halfSize.y,
+    z: positionAtMatrix.z * TILE_Z,
   };
 }
 ```
 
 ### Convert world position to matrix position
 ```js
-function worldToMatrix(position) {
+function worldToMatrix(positionAtWorld) {
   const halfSize = {
     x: TILE_X / 2,
     y: TILE_Y / 2,
   };
   const n = {
-    x: position.x / halfSize.x,
-    y: position.y / halfSize.y,
+    x: positionAtWorld.x / halfSize.x,
+    y: positionAtWorld.y / halfSize.y,
   };
 
   return {
     x: Math.round((n.x + n.y) / 2),
     y: Math.round((n.y - n.x) / 2),
-    z: Math.floor(this.z / TILE_Z),
+    z: Math.floor(positionAtWorld.z / TILE_Z),
   };
 }
 ```
 
 ### Convert world position to screen position
 ```js
-function worldToScreen(position) {
+function worldToScreen(positionAtWorld) {
   return {
-    x: position.x,
-    y: position.y - position.z,
+    x: positionAtWorld.x,
+    y: positionAtWorld.y - positionAtWorld.z,
   };
 }
 ```
