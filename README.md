@@ -1,12 +1,14 @@
 ## Definitions
 
-* TILE_X
-* TILE_Y
-* TILE_Z
+![Cube](./cube.png)
+
+* TILE_X (green)
+* TILE_Y (red)
+* TILE_Z (blue)
 
 * PERSPECTIVE = TILE_Y / TILE_X
 
-## Convertations
+## Render
 
 <details>
   <summary>Convert matrix position to world position</summary>
@@ -56,11 +58,22 @@
   <summary>Convert world position to screen position</summary>
 
   ```js
-  function worldToMatrix(position) {
+  function worldToScreen(position) {
     return {
       x: position.x,
       y: position.y - position.z,
     };
+  }
+  ```
+
+</details>
+
+<details>
+  <summary>Get render depth</summary>
+
+  ```js
+  function depth(position) {
+    return position.y + position.z;
   }
   ```
 
