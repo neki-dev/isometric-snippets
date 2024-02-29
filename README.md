@@ -29,9 +29,11 @@
 ### Get sprite origin
 ```js
 function origin(size) {
+  const fullHeight = size.y + size.z;
+  const centerY = size.y / 2;
   return {
     x: 0.5,
-    y: (size.z - (size.y / 2)) / size.z,
+    y: (fullHeight - centerY) / fullHeight,
   };
 }
 ```
