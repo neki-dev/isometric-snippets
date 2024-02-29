@@ -1,5 +1,3 @@
-# isometric-snippets
-
 ## Definitions
 
 * TILE_X
@@ -8,9 +6,7 @@
 
 * PERSPECTIVE = TILE_Y / TILE_X
 
-## Snippets
-
-### Convertations
+## Convertations
 
 <details>
   <summary>Convert matrix position to world position</summary>
@@ -70,8 +66,7 @@
 
 </details>
 
-
-### Math
+## Math
 
 <details>
   <summary>Get isometric distance</summary>
