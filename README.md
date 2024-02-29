@@ -1,4 +1,13 @@
-## Definitions
+## The main snippets for working with isometric dimensions
+
+* [Definitions](https://github.com/neki-dev/isometric-snippets?tab=readme-ov-file#definitions)
+* [Render](https://github.com/neki-dev/isometric-snippets?tab=readme-ov-file#render)
+* [Conversion](https://github.com/neki-dev/isometric-snippets?tab=readme-ov-file#conversion)
+* [Math](https://github.com/neki-dev/isometric-snippets?tab=readme-ov-file#math)
+
+.
+
+# Definitions
 
 ![Cube](./cube.png)
 
@@ -8,105 +17,81 @@
 
 * PERSPECTIVE = TILE_Y / TILE_X
 
-## Render
+# Render
 
-<details>
-  <summary>Get depth</summary>
+### Get depth
+```js
+function depth(position) {
+  return position.y + position.z;
+}
+```
 
-  ```js
-  function depth(position) {
-    return position.y + position.z;
-  }
-  ```
+# Conversion
 
-</details>
+### Convert matrix position to world position
+```js
+function matrixToWorld(position) {
+  const halfSize = {
+    x: TILE_X / 2,
+    y: TILE_Y / 2,
+  };
 
-## Conversion
+  return {
+    x: (position.x - position.y) * halfSize.x,
+    y: (position.x + position.y) * halfSize.y,
+    z: position.z * TILE_Z,
+  };
+}
+```
 
-<details>
-  <summary>Convert matrix position to world position</summary>
+### Convert world position to matrix position
+```js
+function worldToMatrix(position) {
+  const halfSize = {
+    x: TILE_X / 2,
+    y: TILE_Y / 2,
+  };
+  const n = {
+    x: position.x / halfSize.x,
+    y: position.y / halfSize.y,
+  };
 
-  ```js
-  function matrixToWorld(position) {
-    const halfSize = {
-      x: TILE_X / 2,
-      y: TILE_Y / 2,
-    };
-  
-    return {
-      x: (position.x - position.y) * halfSize.x,
-      y: (position.x + position.y) * halfSize.y,
-      z: position.z * TILE_Z,
-    };
-  }
-  ```
+  return {
+    x: Math.round((n.x + n.y) / 2),
+    y: Math.round((n.y - n.x) / 2),
+    z: Math.floor(this.z / TILE_Z),
+  };
+}
+```
 
-</details>
+### Convert world position to screen position
+```js
+function worldToScreen(position) {
+  return {
+    x: position.x,
+    y: position.y - position.z,
+  };
+}
+```
 
-<details>
-  <summary>Convert world position to matrix position</summary>
+# Math
 
-  ```js
-  function worldToMatrix(position) {
-    const halfSize = {
-      x: TILE_X / 2,
-      y: TILE_Y / 2,
-    };
-    const n = {
-      x: position.x / halfSize.x,
-      y: position.y / halfSize.y,
-    };
-  
-    return {
-      x: Math.round((n.x + n.y) / 2),
-      y: Math.round((n.y - n.x) / 2),
-      z: Math.floor(this.z / TILE_Z),
-    };
-  }
-  ```
+### Get isometric distance
+```js
+function distance(a, b) {
+  return Math.hypot(
+    (b.x - a.x),
+    (b.y - a.y) / PERSPECTIVE,
+  );
+}
+```
 
-</details>
-
-<details>
-  <summary>Convert world position to screen position</summary>
-
-  ```js
-  function worldToScreen(position) {
-    return {
-      x: position.x,
-      y: position.y - position.z,
-    };
-  }
-  ```
-
-</details>
-
-## Math
-
-<details>
-  <summary>Get isometric distance</summary>
-
-  ```js
-  function distance(a, b) {
-    return Math.hypot(
-      (b.x - a.x),
-      (b.y - a.y) / PERSPECTIVE,
-    );
-  }
-  ```
-
-</details>
-
-<details>
-  <summary>Get isometric angle</summary>
-
-  ```js
-  function angle(from, to) {
-    return Math.atan2(
-      (to.y - from.y) / DIMENSION_PERSPECTIVE,
-      (to.x - from.x),
-    );
-  }
-  ```
-
-</details>
+### Get isometric angle
+```js
+function angle(from, to) {
+  return Math.atan2(
+    (to.y - from.y) / DIMENSION_PERSPECTIVE,
+    (to.x - from.x),
+  );
+}
+```
