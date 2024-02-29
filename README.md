@@ -2,6 +2,7 @@
 
 * [Definitions](https://github.com/neki-dev/isometric-snippets?tab=readme-ov-file#definitions)
 * [Render](https://github.com/neki-dev/isometric-snippets?tab=readme-ov-file#render)
+  * [Get sprite origin](https://github.com/neki-dev/isometric-snippets?tab=readme-ov-file#get-sprite-origin)
   * [Get depth](https://github.com/neki-dev/isometric-snippets?tab=readme-ov-file#get-depth)
 * [Conversion](https://github.com/neki-dev/isometric-snippets?tab=readme-ov-file#conversion)
   * [Convert matrix position to world position](https://github.com/neki-dev/isometric-snippets?tab=readme-ov-file#convert-matrix-position-to-world-position)
@@ -24,6 +25,16 @@
 * PERSPECTIVE = TILE_Y / TILE_X
 
 # Render
+
+### Get sprite origin
+```js
+function origin(size) {
+  return {
+    x: 0.5,
+    y: (size.z - (size.y / 2)) / size.z,
+  };
+}
+```
 
 ### Get depth
 ```js
