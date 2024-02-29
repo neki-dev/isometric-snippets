@@ -11,6 +11,19 @@
 ## Render
 
 <details>
+  <summary>Get depth</summary>
+
+  ```js
+  function depth(position) {
+    return position.y + position.z;
+  }
+  ```
+
+</details>
+
+## Conversion
+
+<details>
   <summary>Convert matrix position to world position</summary>
 
   ```js
@@ -63,17 +76,6 @@
       x: position.x,
       y: position.y - position.z,
     };
-  }
-  ```
-
-</details>
-
-<details>
-  <summary>Get render depth</summary>
-
-  ```js
-  function depth(position) {
-    return position.y + position.z;
   }
   ```
 
