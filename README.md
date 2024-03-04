@@ -2,7 +2,7 @@
 
 * [Definitions](https://github.com/neki-dev/isometric-snippets?tab=readme-ov-file#definitions)
 * [Render](https://github.com/neki-dev/isometric-snippets?tab=readme-ov-file#render)
-  * [Get sprite origin](https://github.com/neki-dev/isometric-snippets?tab=readme-ov-file#get-sprite-origin)
+  * [Get origin](https://github.com/neki-dev/isometric-snippets?tab=readme-ov-file#get-origin)
   * [Get depth](https://github.com/neki-dev/isometric-snippets?tab=readme-ov-file#get-depth)
 * [Conversion](https://github.com/neki-dev/isometric-snippets?tab=readme-ov-file#conversion)
   * [Convert matrix position to world position](https://github.com/neki-dev/isometric-snippets?tab=readme-ov-file#convert-matrix-position-to-world-position)
@@ -18,15 +18,17 @@
 
 ![Cube](./cube.png)
 
-* TILE_X (green)
-* TILE_Y (red)
-* TILE_Z (blue)
+* `TILE_X` (green)
+* `TILE_Y` (red)
+* `TILE_Z` (blue)
 
-* PERSPECTIVE = TILE_Y / TILE_X
+* `PERSPECTIVE` = `TILE_Y` / `TILE_X`
 
 # Render
 
-### Get sprite origin
+### Get origin
+Sprite origin equals ground touch point.
+Example: Player origin Y equals foot position, and tile origin is center of bottom face.
 ```js
 function origin(size) {
   const fullHeight = size.y + size.z;
@@ -39,6 +41,7 @@ function origin(size) {
 ```
 
 ### Get depth
+Sprite depth (for draw order) equals sum of Y and Z coordinates.
 ```js
 function depth(positionAtWorld) {
   return positionAtWorld.y + positionAtWorld.z;
