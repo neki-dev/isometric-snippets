@@ -22,7 +22,7 @@
 * `TILE_Y` (red)
 * `TILE_Z` (blue)
 
-* `PERSPECTIVE` = `TILE_Y` / `TILE_X`
+* `TILT_RATIO` = `TILE_Y` / `TILE_X`
 
 # Render
 
@@ -104,7 +104,7 @@ function worldToScreen(positionAtWorld) {
 function distance(from, to) {
   return Math.hypot(
     (to.x - from.x),
-    (to.y - from.y) / PERSPECTIVE,
+    (to.y - from.y) / TILT_RATIO,
   );
 }
 ```
@@ -114,7 +114,7 @@ function distance(from, to) {
 ```js
 function angle(from, to) {
   return Math.atan2(
-    (to.y - from.y) / PERSPECTIVE,
+    (to.y - from.y) / TILT_RATIO,
     (to.x - from.x),
   );
 }
